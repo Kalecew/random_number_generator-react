@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+
+
+const RandomNumber = ({ number, random }) => (
+    <div className="random-number">
+        <h1 className="random-number__title">Генератор<br/>рандомных чисел</h1>
+        <div className="random-number__value">{number}</div>
+        <div className="random-number__footer">
+            <button className="random-number__btn" type="button" onClick={random}>Сгенерировать</button>
+        </div>
+    </div>
+)
+
+class App extends Component{
+    state = {
+        number: 0
+    }
+
+    random = () => this.setState({ number: Math.round(Math.random()*100) })
+
+    render(){
+        const { number } = this.state
+        return(
+            // Header
+            <main className="main">
+                <RandomNumber number={number} random={this.random}/>
+            </main>
+            // Footer
+        )
+    }
+}
+
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <App />,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
